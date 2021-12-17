@@ -1,0 +1,21 @@
+{
+	"configurations": [
+		{
+			"type": "lldb",
+			"request": "launch",
+			"name": "client",
+			"program": "${workspaceFolder}/client",
+			"args": ["18947", "He"],
+			"cwd": "${workspaceFolder}"
+		},
+		{
+			"type": "lldb",
+			"request": "launch",
+			"name": "server",
+			"program": "${workspaceFolder}/server",
+			"args": [],
+			"cwd": "${workspaceFolder}"
+		}
+
+	]
+}

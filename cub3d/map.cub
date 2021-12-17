@@ -1,0 +1,17 @@
+R 1920 1080
+NO                  ./textures/Stone.xpm
+EA ./textures/Purplewall.xpm
+S ./textures/hil.xpm			
+SO ./textures/Bluestone.xpm
+WE ./textures/Eagle.xpm	
+C +0,0,0
+F 122,122,123
+
+11111111111111111
+11111111111111111   
+1N000000000000001   
+10200000201000201
+10000000000100001
+10002000200020001
+10000000000000001
+11111111111111111
