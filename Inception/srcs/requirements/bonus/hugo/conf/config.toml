@@ -1,0 +1,61 @@
+## Basic Configuration
+
+baseurl = "https://mysite.localhost/"
+builddrafts = false
+canonifyurls = false
+languageCode = "en-US"
+
+contentdir = "content"
+layoutdir = "layouts"
+publishdir = "public"
+
+author = "Yaroslav Lapundyak"
+title = "My site"
+
+theme = "hugo-goa"
+
+## Hugo Built-in Features
+#disqusShortname = "https-shenoybr-github-io-hugo-goa-demo" # Comment out to disable Disqus.
+googleAnalytics = "XYZ"
+enableRobotsTXT = true
+
+## Site Settings
+[params]
+author = "Yaroslav Lapundyak"
+intro = "Promising Coder"
+description = "Student of School 21"
+authorimage = "lol.jpeg"
+dateformat = "Feb 8, 2022"
+
+## Site Meta Settings
+[params.meta]
+description = "Simple minimalist theme"
+keywords = "minimalist,blog,goa,hugo,developer"
+
+## Social Accounts
+[params.social]
+github = "cbilbo"
+instagram = "DeusStupri"
+telegram = "DeusStupri"
+email = "cbilbo@student.21-school.ru"
+
+## Extras
+[params.extra]
+copyright = "© 2016. Erlich Bachman. [Some Rights Reserved](http://creativecommons.org/licenses/by/3.0/)."
+poweredby = true
+highlightjs = true
+socialmarkup = true
+toc = true
+displayrssicon = true
+
+## Main Menu
+[[menu.main]]
+    name = "projects"
+    weight = 100
+    identifier = "projects"
+    url = "/projects/"
+[[menu.main]]
+    name = "about"
+    identifier = "about"
+    weight = 200
+    url = "/about/"

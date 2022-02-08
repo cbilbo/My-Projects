@@ -1,0 +1,160 @@
+version: '3.9'
+
+services:
+
+  mariadb:
+    build: requirements/mariadb/
+    container_name: mariadb
+    env_file: .env
+    volumes:
+      - dbdata:/var/lib/mysql
+    restart: always
+    networks:
+      - inception
+    command: 'bash start.sh'
+
+  wordpress:
+    build: requirements/wordpress/
+    container_name: wordpress
+    environment:
+      - HOST=$HOST
+      - WP_DB_HOST=mariadb
+      - WP_DB_USER=$MYSQL_USER
+      - WP_DB_PASSWORD=$MYSQL_PASSWORD
+      - WP_DB_NAME=$MYSQL_DATABASE
+      - WP_REDIS_HOST=redis
+      - WP_REDIS_PORT=6379
+    depends_on:
+      - redis
+      - mariadb
+    volumes:
+      - wpdata:/var/www/cbilbo.42.fr/wordpress
+    networks:
+      - inception
+    restart: always
+    command: 'bash start.sh'
+
+  adminer:
+    build: requirements/bonus/adminer/
+    container_name: adminer
+    depends_on:
+      - mariadb
+    volumes:
+      - admdata:/var/www/cbilbo.42.fr/adminer
+    networks:
+      - inception
+    restart: always
+    command: 'bash start.sh'
+
+  nginx:
+    build: requirements/nginx/
+    container_name: nginx
+    ports:
+      - 443:443
+    depends_on:
+      - wordpress
+      - hugo
+      - adminer
+    volumes:
+      - hugodata:/var/www/cbilbo.42.fr/mysite
+      - wpdata:/var/www/cbilbo.42.fr/wordpress
+      - admdata:/var/www/cbilbo.42.fr/adminer
+    user: root
+    networks:
+      - inception
+    restart: always
+    command: 'bash start.sh'
+
+  ftp:
+    build: requirements/bonus/ftp/
+    container_name: ftp
+    ports: 
+      - "20:20"
+      - "21:21"
+      - "22:22"
+      - "21100:21100"
+    environment:
+      - MIN_PORT=21100
+      - MAX_PORT=21100
+      - FTP_HOST=0.0.0.0
+      - FTP_HOMEDIR=/home/$MYSQL_USER
+      - FTP_USER=$MYSQL_USER
+      - FTP_PASSWORD=$MYSQL_PASSWORD
+    depends_on:
+      - nginx
+    volumes:
+      - wpdata:/home/$MYSQL_USER
+    networks:
+      - inception
+    restart: always
+    command: 'bash start.sh'
+
+  redis:
+    build: requirements/bonus/redis/
+    container_name: redis
+    depends_on:
+      - mariadb
+    volumes: 
+      - redisdata:/var/lib/redis
+    networks:
+      - inception
+    restart: always
+    command: 'bash start.sh'
+
+  hugo:
+    build: requirements/bonus/hugo/
+    container_name: hugo
+    env_file: .env
+    volumes:
+      - hugodata:/root/mysite
+    networks:
+      - inception
+    restart: always
+    command: 'bash start.sh'
+
+networks:
+  inception:
+    name: inception
+    driver: bridge
+
+volumes:
+
+  admdata:
+    name: admdata
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /home/cbilbo/data/adminer
+
+  wpdata:
+    name: wpdata
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /home/cbilbo/data/wordpress
+
+  dbdata:
+    name: dbdata
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /home/cbilbo/data/mariadb
+
+  redisdata:
+    name: redisdata
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /home/cbilbo/data/redis
+
+  hugodata:
+    name: hugodata
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /home/cbilbo/data/mysite

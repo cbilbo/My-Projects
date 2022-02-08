@@ -1,0 +1,8 @@
+#!/bin/bash
+
+openrc
+touch /run/openrc/softlevel
+rc-update add vsftpd default
+adduser -D $MYSQL_USER
+echo "$MYSQL_USER:$MYSQL_PASSWORD" | chpasswd
+/usr/sbin/vsftpd -opasv_min_port=$MIN_PORT -opasv_max_port=$MAX_PORT -opasv_address=localhost /etc/vsftpd/vsftpd.conf
