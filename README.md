@@ -2,6 +2,8 @@
 This is my projects from School 21
 ## DevOps
 Projects that use DevOps tools (Docker, Docker-Compose, Kubernetes).
+## C++
+Basic exersises for understanding C++ language.
 ## Cub3d
 Wolf3d-like game, using raycast algorithm to provide 2.5d graphics.
 ## Libasm
