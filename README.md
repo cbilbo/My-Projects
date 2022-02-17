@@ -1,7 +1,7 @@
 # My-Projects
 This is my projects from School 21
 ## DevOps
-Project  that use DevOps tools (Docker, Docker-Compose, Kubernetes).
+Projects that use DevOps tools (Docker, Docker-Compose, Kubernetes).
 ## Cub3d
 Wolf3d-like game, using raycast algorithm to provide 2.5d graphics.
 ## Libasm
@@ -11,7 +11,7 @@ Implementation of some C standard library functions, integrated into my own libr
 ## Minishell
 Implementation of basic Bash capability. This is group project for two persons. I did it with yaskaer. I was responsible for parsing, argument checking, redirection, signal handling and project build. Yaskaer tooks care of the execution, piping, environment variables and built-in functions.
 ## Minitalk
-Two programs (server and client) which exchange data using UNIX signals.
+Two programs (server and client) that exchange data using UNIX signals.
 ## Philosophers
 My solution of the dinning philosophers problem.
 ## Push Swap
