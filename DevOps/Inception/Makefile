@@ -11,4 +11,4 @@ fclean: dataclean
 	bash clean.sh
 
 dataclean:
-	rm -rf ../data/mariadb/* ../data/mysite/* ../data/wordpress/* ../data/redis/* ../data/adminer/*
+	rm -rf $HOME/data/mariadb/* $HOME/data/mysite/* $HOME/data/wordpress/* $HOME/data/redis/* $HOME/data/adminer/*

@@ -16,7 +16,7 @@ CC = gcc
 CFLAGS = -Wall -Werror -Wextra
 RM = rm -rf
 
-all: libft $(NAME)
+all: brew libft $(NAME)
 
 $(NAME): message $(OBJS) $(HEADER)
 	@$(CC) $(CFLAGS) $(OBJS) $(LIB) -lreadline -L /Users/$(USER_N)/.brew/opt/readline/lib -I /Users/$(USER_N)/.brew/opt/readline/include -o $(NAME)
@@ -39,9 +39,19 @@ fclean: clean
 	@$(RM) $(LIB) $(NAME)
 	@echo 'Minishell deleted('
 
+brewfclean: fclean
+	rm -rf ~/.brew
+
 re: fclean all
 
 message:
 	@echo -n 'Create minishell '
 
-.PHONY: all clean fclean re libft message
+brew:
+	@if ! [ -d ~/.brew ]; then\
+		curl -fsSL https://rawgit.com/kube/42homebrew/master/install.sh | zsh;\
+		brew update;\
+		brew install readline;\
+	fi
+
+.PHONY: all clean fclean re libft message brew brewfclean
